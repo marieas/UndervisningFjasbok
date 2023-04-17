@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">    
+       
+    </div>
+    <script>
+        //Model 
+        let børre = {
+            age : 25,
+            relationshipStatus : "single",
+            name : "Børre Knudsen",
+            img: "https://media.istockphoto.com/id/187722063/photo/funny-man-with-watermelon-helmet-and-goggles.jpg?s=1024x1024&w=is&k=20&c=PwnKnYtz9N3ImxwkSGJihluX_WaeMLjUs75okB8BG8Y="
+        }
+
+        let selectedPerson = børre;
+      
+        let friends = [{name: "Bjarne", age: 25, relationshipStatus: "Taken", img:  "https://media.istockphoto.com/id/1072528872/photo/the-man-screaming-with-open-mouth-isolated-on-pink-background-concept-face-emotion.jpg?s=1024x1024&w=is&k=20&c=H55bzXdBTIKMoYmzgIIZXUxsodS4af7N72tnk4YWQ7k="},
+                       {name: "Shirley",age: 77, relationshipStatus: "Widow", img:  "https://media.istockphoto.com/id/1185220608/photo/funny-grandmother-portraits-senior-old-woman-dressing-elegant-for-a-special-event-granny.jpg?s=1024x1024&w=is&k=20&c=9nMNL1bPTBrNW8ox3aqQwbAc9HQd7GppRmpRWWWUmUo="},
+                       {name: "Ahmed",age: 27, relationshipStatus: "Single", img: "https://media.istockphoto.com/id/1127302482/photo/real-pakistani-man-with-excited-expression-and-eyes-closed.jpg?s=1024x1024&w=is&k=20&c=mvlj3V0_EBmjvI193km3bLw30Zp80l1Yt47A9b1yvVw="},
+                       {name: "Siri",age: 25, relationshipStatus: "Taken", img:  "https://media.istockphoto.com/id/972086664/photo/curious-woman-looking-through-a-magnifying-glass.jpg?s=1024x1024&w=is&k=20&c=S4eZC5Guq3CHu8S7P3GeGh5jAngAW1oUjR-HheS6wh8=" },
+                       {name: "Gerd",age: 85, relationshipStatus: "Taken", img: "https://media.istockphoto.com/id/1167031517/photo/eccentric-senior-woman-portrait.jpg?s=1024x1024&w=is&k=20&c=ZISrORSB-NrxYkgoWlrFOCTvDjjp0Gpbx8EKGbTklpc="},
+                       {name: "Britney",age: 15, relationshipStatus: "Single", img: "https://media.istockphoto.com/id/525211480/photo/pop-girl-portrait-wearing-weird-sunglasses-and-blue-wig.jpg?s=1024x1024&w=is&k=20&c=vxMZQJdBssPndd_DDg36XSOQ63nJ_bIF49B31jIi8Ns="}
+                      ]
+
+        updateView();
+        function updateView(){
+            document.getElementById('app').innerHTML = `${drawProfileInfo()}
+                                                        ${drawFriendsView()}                `
+        }
+        function drawProfileInfo(){
+            console.log(selectedPerson)
+          
+            let html = /*html*/`
+            <div class="profileInfo">
+            <img class="profilePic" src="${selectedPerson.img}">     
+            <div class="name">${selectedPerson.name}</div>
+            <div>
+            <div class="title">Age</div>
+            <div>${selectedPerson.age}</div>
+            <br>
+            <div class="title">Relationship status</div>
+            <div>${selectedPerson.relationshipStatus}</div>
+            <br>
+            <br>
+            <div>Search</div>
+            <input>
+        </div>
+        </div>      
+        <br>
+            `
+            return html;
+        }
+        function drawFriendsView(){
+            let html = /*html*/`
+            <div class="friends">
+            <div class="title">Friends:
+            </div> 
+            ${createImageTags()}
+            </div>
+            `
+            return html;
+        }
+      
+        function createImageTags(){
+            let html = `` 
+            for (let index = 0; index < friends.length; index++) {
+                html += /*html*/`
+                <div>${friends[index].name}</div>
+                <img class="thumbnail" src="${friends[index].img}" onclick="setSelectedPerson(${index})">
+                `;                
+            }
+            return html;
+        }
+        function setSelectedPerson(index){
+            selectedPerson = friends[index];
+            updateView()
+        }
+    </script>
+    <style>
+        .profilePic{
+            height: 200px; 
+            width: 200px;
+            border-radius: 50%;
+            border-style: solid;
+            border-width: 5px;
+            border-color: black;
+        }
+        .profileInfo{
+            display: flex;
+            flex-direction: row;
+        }
+        .friends{
+            width: 150px;
+            display: flexbox;
+            flex-wrap: wrap;
+        }
+        .thumbnail{
+            height: 40px; width: 40px;
+        }
+        .title{
+            font-size: medium;
+            font-weight: bold;
+        }
+        .name{
+            font-size: medium;
+            font-family:Arial, Helvetica, sans-serif
+        }
+    </style>
+</body>
+</html>
